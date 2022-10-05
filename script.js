@@ -86,8 +86,11 @@ function showEntry(i) {
     container.innerHTML = '';
     container.innerHTML += /*html*/ `
     <div class="entry-headline">
-        <i id="close-entry" class="fa-solid fa-xmark" onclick="closeEntry()"></i>
         <span id="entry-id">#${i}</span>
+        <i id="close-entry" class="fa-solid fa-xmark" onclick="closeEntry()"></i>
+    </div>
+    <div class="entry-imgbox">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i}.png" alt="">
     </div>
     `
 }
