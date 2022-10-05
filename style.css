@@ -1,4 +1,11 @@
-
+:root {
+    --default-bg: rgb(171, 168, 164);
+    --water: rgb(47, 151, 255);
+    --fire: rgb(255, 75, 75);
+    --grass: rgb(23, 202, 125);
+    --electric: rgb(255, 191, 0);
+    --poison: rgb(153, 0, 255);
+}
 
 * {
     margin: 0;
@@ -19,9 +26,11 @@ body {
     position: sticky;
     top: 0;
     left: 0;
+    background: rgb(220, 220, 220);
     width: 100%;
     height: 80px;
     padding: 15px 80px;
+    z-index: 10000;
 }
 
 #header #logo {
@@ -88,7 +97,7 @@ body {
     gap: 25px;
     width: 250px;
     height: 180px;
-    background: #f00;
+    background: var(--default-bg);
     border-radius: 15px;
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
     padding: 25px 30px;
