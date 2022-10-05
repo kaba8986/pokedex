@@ -42,8 +42,10 @@ body {
     height: 100%;
     border-radius: 25px;
     outline: none;
-    padding-left: 15px;
+    padding-left: 25px;
+    font-size: 22px;
     border: 1px solid grey;
+    letter-spacing: 1px;
 }
 
 .search-bar img {
@@ -57,8 +59,9 @@ body {
     transition: 0.5s;
 }
 
-.active-menu {
-    width: 300px;
+
+.active-search {
+    width: 400px;
     transition: 0.5s;
 }
 
@@ -67,9 +70,56 @@ body {
     transition: 0.5s;
 }
 
-#container {
+#card-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
     min-height: 50vh;
-    background-color: #f00;
+    background-color: #fff;
     color: #fff;
-    padding: 20px;
+    padding: 20px 80px;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+    width: 250px;
+    height: 180px;
+    background: #f00;
+    border-radius: 15px;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+    padding: 25px 30px;
+    cursor: pointer;
+    transition: 0.2s;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: scale(1.03);
+    transition: 0.2s;
+}
+
+.poke-type {
+    padding: 6px 20px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 15px;
+}
+
+.poke-id {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+}
+
+.img-small {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 130px;
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom;
 }
