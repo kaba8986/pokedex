@@ -12,11 +12,13 @@ async function loadPokedex() {
     }
 }
 
+//CREATE MINI-CARDS
+
 function buildCard(i, currentPokemon) {
     let types = getTypes(currentPokemon);
     let cardBox = document.querySelector('#card-box');
     cardBox.innerHTML += /*html*/ `
-    <div class="card" id="card-${i}">
+    <div class="card" id="card-${i}" onclick="showEntry(${i})">
         <span class="poke-id">#${i}</span>
         <h3>${capitalize(currentPokemon['name'])}</h3>
         ${addTypes(types)}
@@ -26,18 +28,6 @@ function buildCard(i, currentPokemon) {
     cardBgColor(currentPokemon);
 }
 
-function cardBgColor(currentPokemon) {
-    let types = getTypes(currentPokemon);
-    console.log(types);
-    for(let i = 0; i < pokeTypes.length; i++) {
-        if(types.indexOf(pokeTypes[i]) > -1) {
-            document.querySelector(`#card-${currentPokemon['id']}`).style.backgroundColor = `var(--${pokeTypes[i]})`
-            return;
-        } else {
-            document.querySelector(`#card-${currentPokemon['id']}`).style.backgroundColor = `var(--default-bg)`
-        }
-    }
-}
 
 //NOTE:  HOW TO CAPITALIZE TYPES?
 function getTypes(currentPokemon) {
@@ -58,16 +48,25 @@ function addTypes(types) {
     return string;
 }
 
-/*
-`<p><span class="poke-type">${type['type']['name']}</span></p>`
-*/
 
-function renderPokeInfo() {
-    document.querySelector('#poke-name').innerHTML = currentPokemon['name'];
-    document.querySelector('#poke-type-a').innerHTML = currentPokemon['types'][0]['type']['name'];
-    document.querySelector('#poke-id').innerHTML = `#${currentPokemon['id']}`;
+function cardBgColor(currentPokemon) {
+    let types = getTypes(currentPokemon);
+    for(let i = 0; i < pokeTypes.length; i++) {
+        if(types.indexOf(pokeTypes[i]) > -1) {
+            document.querySelector(`#card-${currentPokemon['id']}`).style.backgroundColor = `var(--${pokeTypes[i]})`
+            return;
+        } else {
+            document.querySelector(`#card-${currentPokemon['id']}`).style.backgroundColor = `var(--default-bg)`
+        }
+    }
 }
 
+
+function capitalize(s) {
+    return s[0].toUpperCase() + s.slice(1);
+}
+
+//GENERAL FUNCTIONS
 function toggleSearch() {
     document.querySelector('.search-bar').classList.toggle('active-search');
     document.querySelector('#pokeball').classList.toggle('rotate-ball');
@@ -75,13 +74,22 @@ function toggleSearch() {
 }
 
 
-function getPokeDetails() {
-    let id = currentPokemon['id'];
+//CREATE POKEMON-ENTRY
+
+function closeEntry() {
+    document.querySelector('.layer').classList.toggle('dis-none');
 }
 
-function capitalize(s) {
-    return s[0].toUpperCase() + s.slice(1);
+function showEntry(i) {
+    document.querySelector('.layer').classList.toggle('dis-none');
+    let container = document.querySelector('.poke-entry-container');
+    container.innerHTML = '';
+    container.innerHTML += /*html*/ `
+    <div class="entry-headline">
+        <i id="close-entry" class="fa-solid fa-xmark" onclick="closeEntry()"></i>
+        <span id="entry-id">#${i}</span>
+    </div>
+    `
 }
-
 
 
