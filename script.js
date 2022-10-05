@@ -31,11 +31,8 @@ function cardBgColor(currentPokemon) {
     console.log(types);
     for(let i = 0; i < pokeTypes.length; i++) {
         if(types.indexOf(pokeTypes[i]) > -1) {
-            /*
             document.querySelector(`#card-${currentPokemon['id']}`).style.backgroundColor = `var(--${pokeTypes[i]})`
-            */
-            document.querySelector(`#card-${currentPokemon['id']}`).style.backgroundColor = `blue`;
-
+            return;
         } else {
             document.querySelector(`#card-${currentPokemon['id']}`).style.backgroundColor = `var(--default-bg)`
         }
