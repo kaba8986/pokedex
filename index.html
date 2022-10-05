@@ -9,7 +9,16 @@
     <script src="https://kit.fontawesome.com/b7a5700e28.js" crossorigin="anonymous"></script>
     <title>Pokedex</title>
 </head>
-<body>
-    
+<body onload="loadPokedex()">
+    <div id="header">
+      <p id="logo">POKEMON</p>
+      <div class="search-bar">
+        <input type="text" name="" id="input-field">
+        <img id="pokeball" src="img/pokeball.png" alt="" onclick="toggleSearch()">
+      </div>
+    </div>
+    <div id="container">
+        <h2 id="poke-name">Name</h2>
+    </div>
 </body>
 </html>
