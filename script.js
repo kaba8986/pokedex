@@ -103,12 +103,16 @@ function capitalize(s) {
 //CREATE POKEMON-ENTRY
 function showEntry(i) {
     let types = getTypes(i);
-    document.querySelector('.layer').classList.toggle('dis-none');
+    document.querySelector('.layer').classList.remove('dis-none');
     let container = document.querySelector('.poke-entry-container');
     container.innerHTML = '';
     container.innerHTML = /*html*/ `
     <div class="entry-headline" style="background: ${bgColor(i)}">
         <span id="entry-id">#${getId(i)}</span>
+        <div class="change-entry">
+            <span id="prev-entry" class="entry-slider" onclick="changeEntry(${i}, -1)"><i class="fa-solid fa-circle-chevron-left"></i></span>
+            <span id="next-entry" class="entry-slider" onclick="changeEntry(${i}, 1)"><i class="fa-solid fa-circle-chevron-right"></i></span>
+        </div>
         <i id="close-entry" class="fa-solid fa-xmark" onclick="closeEntry()"></i>
     </div>
     <div id="entry-imgbox-${i}" class="entry-imgbox" style="background: ${bgColor(i)}">
@@ -130,8 +134,13 @@ function showEntry(i) {
 }
 
 
+function changeEntry(i, j) {
+    showEntry(i + j);
+}
+
+
 function closeEntry() {
-    document.querySelector('.layer').classList.toggle('dis-none');
+    document.querySelector('.layer').classList.add('dis-none');
 }
 
 //RENDER STATS
