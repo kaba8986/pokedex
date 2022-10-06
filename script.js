@@ -40,14 +40,25 @@ function renderTypes(types) {
     return string;
 }
 
+function getId(i) {
+    let number = i+1;
+    if(number < 10) {
+        return `00${number}`
+    } else if (number >= 10 && number < 100) {
+        return `0${number}`
+    } else {
+        return number;
+    }
+}
+
 
 //RENDER MINI-CARDS
 function renderCard(i) {
     let types = getTypes(i);
     let cardBox = document.querySelector('#card-box');
     cardBox.innerHTML += /*html*/ `
-    <div class="card" id="card-${i}" onclick="">
-        <span class="poke-id">#${i}</span>
+    <div class="card" id="card-${i}" onclick="showEntry(${i})">
+        <span class="poke-id">#${getId(i)}</span>
         <h3>${getName(i)}</h3>
         ${renderTypes(types)}
         <img class="img-small" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i+1}.png" alt="">
@@ -59,7 +70,6 @@ function renderCard(i) {
 
 function bgColor(i) {
     let types = getTypes(i);
-    console.log(types);
     let color = `var(--default-bg)`;
     for(let j = 0; j < types.length; j++) {
         if(pokeTypes.includes(types[j])) {
@@ -72,7 +82,6 @@ function bgColor(i) {
 
 
 //GENERAL FUNCTIONS
-
 function toggleSearch() {
     document.querySelector('.search-bar').classList.toggle('active-search');
     if(document.querySelector('.search-bar').classList.contains('active-search')){
@@ -93,22 +102,22 @@ function capitalize(s) {
 
 //CREATE POKEMON-ENTRY
 
-function showEntry(i, currentPokemon) {
-    console.log();
+function showEntry(i) {
+    let types = getTypes(i);
     document.querySelector('.layer').classList.toggle('dis-none');
     let container = document.querySelector('.poke-entry-container');
     container.innerHTML = '';
     container.innerHTML += /*html*/ `
-    <div class="entry-headline">
-        <span id="entry-id">#${i}</span>
+    <div class="entry-headline" style="background: ${bgColor(i)}">
+        <span id="entry-id">#${getId(i)}</span>
         <i id="close-entry" class="fa-solid fa-xmark" onclick="closeEntry()"></i>
     </div>
-    <div id="entry-imgbox-${i}" class="entry-imgbox">
+    <div id="entry-imgbox-${i}" class="entry-imgbox" style="background: ${bgColor(i)}">
+        <h3>${getName(i)}</h3>
+        ${renderTypes(types)}
         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i}.png" alt="">
     </div>
     `
-
-    console.log(bgColor(currentPokemon));
 }
 
 function closeEntry() {
