@@ -5,8 +5,8 @@ let pokeTypes = ['Fire', 'Water', 'Grass', 'Electric', 'Poison'];
 
 //FETCH POKEMON DATAS
 async function loadPokedex() {
-    for(let i = 0; i < 21; i++) {
-        let url = `https://pokeapi.co/api/v2/pokemon/${i+1}`;
+    for (let i = 0; i < 151; i++) {
+        let url = `https://pokeapi.co/api/v2/pokemon/${i + 1}`;
         let response = await fetch(url);
         currentPokemon = await response.json();
         pokeList.push(currentPokemon)
@@ -24,7 +24,7 @@ function getName(i) {
 
 function getTypes(i) {
     let types = [];
-    for(let j = 0; j < pokeList[i]['types'].length; j++) {
+    for (let j = 0; j < pokeList[i]['types'].length; j++) {
         let currType = pokeList[i]['types'][j];
         types.push(capitalize(currType['type']['name']));
     }
@@ -34,15 +34,15 @@ function getTypes(i) {
 
 function renderTypes(types) {
     let string = '';
-    for(let i = 0; i < types.length; i++) {
+    for (let i = 0; i < types.length; i++) {
         string += /*html*/ `<p><span class="poke-type">${types[i]}</span></p>`
     }
     return string;
 }
 
 function getId(i) {
-    let number = i+1;
-    if(number < 10) {
+    let number = i + 1;
+    if (number < 10) {
         return `00${number}`
     } else if (number >= 10 && number < 100) {
         return `0${number}`
@@ -61,7 +61,7 @@ function renderCard(i) {
         <span class="poke-id">#${getId(i)}</span>
         <h3>${getName(i)}</h3>
         ${renderTypes(types)}
-        <img class="img-small" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i+1}.png" alt="">
+        <img class="img-small" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i + 1}.png" alt="">
     </div>
     `
     document.querySelector(`#card-${i}`).style.backgroundColor = bgColor(i);
@@ -71,8 +71,8 @@ function renderCard(i) {
 function bgColor(i) {
     let types = getTypes(i);
     let color = `var(--default-bg)`;
-    for(let j = 0; j < types.length; j++) {
-        if(pokeTypes.includes(types[j])) {
+    for (let j = 0; j < types.length; j++) {
+        if (pokeTypes.includes(types[j])) {
             color = `var(--${types[j]})`;
             return color;
         }
@@ -84,11 +84,11 @@ function bgColor(i) {
 //GENERAL FUNCTIONS
 function toggleSearch() {
     document.querySelector('.search-bar').classList.toggle('active-search');
-    if(document.querySelector('.search-bar').classList.contains('active-search')){
+    if (document.querySelector('.search-bar').classList.contains('active-search')) {
         document.querySelector('#pokeball').style.transform = 'rotate(-300deg)';
-        document.querySelector('#input-field').removeAttribute('readonly'); 
+        document.querySelector('#input-field').removeAttribute('readonly');
     } else {
-        document.querySelector('#pokeball').style.transform = 'rotate(300deg)';  
+        document.querySelector('#pokeball').style.transform = 'rotate(300deg)';
         document.querySelector('#input-field').readOnly = 'true';
     }
 }
@@ -96,6 +96,22 @@ function toggleSearch() {
 
 function capitalize(s) {
     return s[0].toUpperCase() + s.slice(1);
+}
+
+
+function scrollToPokemon(name) {
+    let i = pokeList.indexOf(name);
+    let card = document.querySelector(`#card-${i}`);
+    card.scrollIntoView();
+    
+    
+}
+
+function enter() {
+    if(event.key === 'Enter') {
+        let input = document.querySelector('#input-field');
+        scrollToPokemon(input.value);     
+    }
 }
 
 
@@ -118,7 +134,7 @@ function showEntry(i) {
     <div id="entry-imgbox-${i}" class="entry-imgbox" style="background: ${bgColor(i)}">
         <h3>${getName(i)}</h3>
         ${renderTypes(types)}
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i+1}.png" alt="">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i + 1}.png" alt="">
     </div>
     <div id="entry-content-${i}" class="entry-content">
         <nav id="entry-nav-${i}" class="entry-nav">
@@ -135,7 +151,7 @@ function showEntry(i) {
 
 
 function changeEntry(i, j) {
-    if(i == 0 && j == -1 ) {
+    if (i == 0 && j == -1) {
         return;
     } else if (i == pokeList.length - 1 && j == 1) {
         return;
@@ -153,7 +169,7 @@ function renderStats(i) {
     let stats = getStats(i);
     let content = document.querySelector(`#entry-main-${i}`);
     content.innerHTML = '';
-    for(let j = 0; j < stats.length; j++) {
+    for (let j = 0; j < stats.length; j++) {
         content.innerHTML += /*html*/ `
         <div class="stats-line">
             <div class="stats-label">${stats[j][0]}</div>
@@ -163,14 +179,14 @@ function renderStats(i) {
             </div>
         </div>
     `;
-    renderBarLine(i, j, stats[j][1]);
+        renderBarLine(i, j, stats[j][1]);
     }
 }
 
 
 function getStats(i) {
     let values = [['HP'], ['Attack'], ['Defense'], ['Sp. Atk'], ['Sp. Def'], ['Speed']];
-    for(let j = 0; j < pokeList[j]['stats'].length; j++) {
+    for (let j = 0; j < pokeList[j]['stats'].length; j++) {
         let curStat = pokeList[i]['stats'][j];
         values[j].push(curStat['base_stat']);
     }
@@ -181,7 +197,7 @@ function getStats(i) {
 function renderBarLine(i, j, val) {
     let barline = document.querySelector(`#bar-line-${i}-${j}`);
     barline.style.width = `${val}%`;
-    if(val <= 50) {
+    if (val <= 50) {
         barline.style.backgroundColor = 'red';
     }
 }
