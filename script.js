@@ -25,7 +25,7 @@ function buildCard(i, currentPokemon) {
         <img class="img-small" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i}.png" alt="">
     </div>
     `
-    cardBgColor(currentPokemon);
+    document.querySelector(`#card-${i}`).style.backgroundColor = bgColor(currentPokemon);
 }
 
 
@@ -43,22 +43,22 @@ function addTypes(types) {
     let string = '';
     for(let i = 0; i < types.length; i++) {
         let type = currentPokemon['types'][i]; 
-        string += `<p><span class="poke-type">${type['type']['name']}</span></p>`
+        string += /*html*/ `<p><span class="poke-type">${type['type']['name']}</span></p>`
     }
     return string;
 }
 
 
-function cardBgColor(currentPokemon) {
+function bgColor(currentPokemon) {
     let types = getTypes(currentPokemon);
+    let color = `var(--default-bg)`;
     for(let i = 0; i < pokeTypes.length; i++) {
         if(types.indexOf(pokeTypes[i]) > -1) {
-            document.querySelector(`#card-${currentPokemon['id']}`).style.backgroundColor = `var(--${pokeTypes[i]})`
-            return;
-        } else {
-            document.querySelector(`#card-${currentPokemon['id']}`).style.backgroundColor = `var(--default-bg)`
-        }
+            color = `var(--${pokeTypes[i]})`
+            return color;
+        } 
     }
+    return color;
 }
 
 
@@ -67,11 +67,18 @@ function capitalize(s) {
 }
 
 //GENERAL FUNCTIONS
+
 function toggleSearch() {
     document.querySelector('.search-bar').classList.toggle('active-search');
-    document.querySelector('#pokeball').classList.toggle('rotate-ball');
-
+    if(document.querySelector('.search-bar').classList.contains('active-search')){
+        document.querySelector('#pokeball').style.transform = 'rotate(-300deg)';
+        document.querySelector('#input-field').removeAttribute('readonly'); 
+    } else {
+        document.querySelector('#pokeball').style.transform = 'rotate(300deg)';  
+        document.querySelector('#input-field').readOnly = 'true';
+    }
 }
+
 
 
 //CREATE POKEMON-ENTRY
@@ -80,19 +87,21 @@ function closeEntry() {
     document.querySelector('.layer').classList.toggle('dis-none');
 }
 
-function showEntry(i) {
+function showEntry(i, currentPokemon) {
     document.querySelector('.layer').classList.toggle('dis-none');
     let container = document.querySelector('.poke-entry-container');
     container.innerHTML = '';
     container.innerHTML += /*html*/ `
-    <div class="entry-headline">
+    <div class="entry-headline"}>
         <span id="entry-id">#${i}</span>
         <i id="close-entry" class="fa-solid fa-xmark" onclick="closeEntry()"></i>
     </div>
-    <div class="entry-imgbox">
+    <div id="entry-imgbox-${i}" class="entry-imgbox">
         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i}.png" alt="">
     </div>
     `
+
+    console.log(bgColor(currentPokemon));
 }
 
 
