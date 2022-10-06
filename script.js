@@ -22,7 +22,7 @@ function buildCard(i, currentPokemon) {
         <span class="poke-id">#${i}</span>
         <h3>${capitalize(currentPokemon['name'])}</h3>
         ${addTypes(types)}
-        <img class="img-small" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i}.png" alt="">
+        <img class="img-small" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i}.png" alt="">
     </div>
     `
     document.querySelector(`#card-${i}`).style.backgroundColor = bgColor(currentPokemon);
@@ -97,11 +97,10 @@ function showEntry(i, currentPokemon) {
         <i id="close-entry" class="fa-solid fa-xmark" onclick="closeEntry()"></i>
     </div>
     <div id="entry-imgbox-${i}" class="entry-imgbox">
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i}.png" alt="">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i}.png" alt="">
     </div>
     `
 
     console.log(bgColor(currentPokemon));
 }
-
 

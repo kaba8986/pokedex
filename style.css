@@ -148,9 +148,9 @@ body {
 
 .img-small {
     position: absolute;
-    bottom: 0px;
-    right: 0px;
-    width: 130px;
+    bottom: 20px;
+    right: 10px;
+    width: 100px;
     height: 100%;
     object-fit: contain;
     object-position: bottom;
