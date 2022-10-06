@@ -52,7 +52,7 @@ function getId(i) {
 }
 
 
-//RENDER MINI-CARDS
+////////////////RENDER MINI-CARDS
 function renderCard(i) {
     let types = getTypes(i);
     let cardBox = document.querySelector('#card-box');
@@ -93,10 +93,6 @@ function toggleSearch() {
     }
 }
 
-function toggleNav() {
-
-}
-
 
 function capitalize(s) {
     return s[0].toUpperCase() + s.slice(1);
@@ -105,13 +101,12 @@ function capitalize(s) {
 
 
 //CREATE POKEMON-ENTRY
-
 function showEntry(i) {
     let types = getTypes(i);
     document.querySelector('.layer').classList.toggle('dis-none');
     let container = document.querySelector('.poke-entry-container');
     container.innerHTML = '';
-    container.innerHTML += /*html*/ `
+    container.innerHTML = /*html*/ `
     <div class="entry-headline" style="background: ${bgColor(i)}">
         <span id="entry-id">#${getId(i)}</span>
         <i id="close-entry" class="fa-solid fa-xmark" onclick="closeEntry()"></i>
@@ -119,20 +114,60 @@ function showEntry(i) {
     <div id="entry-imgbox-${i}" class="entry-imgbox" style="background: ${bgColor(i)}">
         <h3>${getName(i)}</h3>
         ${renderTypes(types)}
-        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i}.png" alt="">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i+1}.png" alt="">
     </div>
     <div id="entry-content-${i}" class="entry-content">
         <nav id="entry-nav-${i}" class="entry-nav">
-            <a href="#" class="active-link" onclick="${toggleNav()}">About</a>
-            <a href="#" onclick="${toggleNav()}">Stats</a>
-            <a href="#" onclick="${toggleNav()}">Evolution</a>
-            <a href="#" onclick="${toggleNav()}">Moves</a>
+            <a href="#" class="nav-link">About</a>
+            <a href="#" class="nav-link  active-link">Stats</a>
+            <a href="#" class="nav-link">Evolution</a>
+            <a href="#" class="nav-link">Moves</a>
         </nav>
+        <div id="entry-main-${i}" class="entry-main"></div>
     </div>
     `
+    renderStats(i);
 }
+
 
 function closeEntry() {
     document.querySelector('.layer').classList.toggle('dis-none');
 }
 
+//RENDER STATS
+function renderStats(i) {
+    let stats = getStats(i);
+    let content = document.querySelector(`#entry-main-${i}`);
+    content.innerHTML = '';
+    for(let j = 0; j < stats.length; j++) {
+        content.innerHTML += /*html*/ `
+        <div class="stats-line">
+            <div class="stats-label">${stats[j][0]}</div>
+            <div class="stats-value">${stats[j][1]}</div>
+            <div class="stats-bar">
+                <div class="bar-line" id="bar-line-${i}-${j}"></div>
+            </div>
+        </div>
+    `;
+    renderBarLine(i, j, stats[j][1]);
+    }
+}
+
+
+function getStats(i) {
+    let values = [['HP'], ['Attack'], ['Defense'], ['Sp. Atk'], ['Sp. Def'], ['Speed']];
+    for(let j = 0; j < pokeList[j]['stats'].length; j++) {
+        let curStat = pokeList[i]['stats'][j];
+        values[j].push(curStat['base_stat']);
+    }
+    return values;
+}
+
+
+function renderBarLine(i, j, val) {
+    let barline = document.querySelector(`#bar-line-${i}-${j}`);
+    barline.style.width = `${val}%`;
+    if(val <= 50) {
+        barline.style.backgroundColor = 'red';
+    }
+}

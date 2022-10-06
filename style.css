@@ -257,3 +257,38 @@ body {
     color: rgb(42, 42, 42);
     border-bottom: 2px solid rgb(42, 42, 42);
 }
+
+.entry-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 25px 30px;
+}
+
+.stats-line {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+    color: rgb(128, 128, 128);
+}
+
+.stats-line .stats-label {
+    width: 25%
+}
+
+.stats-line .stats-value {
+    width: 12%;
+}
+
+.stats-line .stats-bar {
+    display: flex;
+    align-items: center;
+    width: 60%;
+    height: 14px;
+}
+
+.stats-bar .bar-line {
+    height: 5px;
+    background-color: green;
+}
