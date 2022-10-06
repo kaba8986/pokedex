@@ -1,10 +1,10 @@
 :root {
     --default-bg: rgb(171, 168, 164);
-    --water: rgb(47, 151, 255);
-    --fire: rgb(255, 75, 75);
-    --grass: rgb(23, 202, 125);
-    --electric: rgb(255, 191, 0);
-    --poison: rgb(153, 0, 255);
+    --Water: rgb(47, 151, 255);
+    --Fire: rgb(255, 75, 75);
+    --Grass: rgb(23, 202, 125);
+    --Electric: rgb(255, 191, 0);
+    --Poison: rgb(153, 0, 255);
 }
 
 * {
@@ -131,6 +131,7 @@ body {
 
 .card:hover {
     transform: scale(1.03);
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.4);
     transition: 0.2s;
 }
 
@@ -211,9 +212,8 @@ body {
 
 .entry-imgbox img {
     position: absolute;
-    right: -70px;
-    bottom: 0px;
-    width: 90%;
-    height: 90%; 
+    right: 20px;
+    bottom: 20px;
+    width: 180px;
     object-fit: contain;
 }

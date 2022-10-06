@@ -1,70 +1,75 @@
 
 let currentPokemon;
-let pokeTypes = ['fire', 'water', 'grass', 'electric', 'poison'];
+let pokeList = [];
+let pokeTypes = ['Fire', 'Water', 'Grass', 'Electric', 'Poison'];
 
-
+//FETCH POKEMON DATAS
 async function loadPokedex() {
-    for(let i = 1; i < 31; i++) {
-        let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
+    for(let i = 0; i < 21; i++) {
+        let url = `https://pokeapi.co/api/v2/pokemon/${i+1}`;
         let response = await fetch(url);
         currentPokemon = await response.json();
-        buildCard(i, currentPokemon);
+        pokeList.push(currentPokemon)
+        renderCard(i)
     }
 }
 
-//CREATE MINI-CARDS
 
-function buildCard(i, currentPokemon) {
-    let types = getTypes(currentPokemon);
-    let cardBox = document.querySelector('#card-box');
-    cardBox.innerHTML += /*html*/ `
-    <div class="card" id="card-${i}" onclick="showEntry(${i})">
-        <span class="poke-id">#${i}</span>
-        <h3>${capitalize(currentPokemon['name'])}</h3>
-        ${addTypes(types)}
-        <img class="img-small" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i}.png" alt="">
-    </div>
-    `
-    document.querySelector(`#card-${i}`).style.backgroundColor = bgColor(currentPokemon);
+//GET DETAILS FUNCTIONS
+function getName(i) {
+    let pokemon = pokeList[i];
+    return capitalize(pokemon.name);
 }
 
 
-//NOTE:  HOW TO CAPITALIZE TYPES?
-function getTypes(currentPokemon) {
+function getTypes(i) {
     let types = [];
-    for(let i = 0; i < currentPokemon['types'].length; i++) { 
-        let type = currentPokemon['types'][i]; 
-        types.push(`${type['type']['name']}`); 
+    for(let j = 0; j < pokeList[i]['types'].length; j++) {
+        let currType = pokeList[i]['types'][j];
+        types.push(capitalize(currType['type']['name']));
     }
     return types;
 }
 
-function addTypes(types) {
+
+function renderTypes(types) {
     let string = '';
     for(let i = 0; i < types.length; i++) {
-        let type = currentPokemon['types'][i]; 
-        string += /*html*/ `<p><span class="poke-type">${type['type']['name']}</span></p>`
+        string += /*html*/ `<p><span class="poke-type">${types[i]}</span></p>`
     }
     return string;
 }
 
 
-function bgColor(currentPokemon) {
-    let types = getTypes(currentPokemon);
+//RENDER MINI-CARDS
+function renderCard(i) {
+    let types = getTypes(i);
+    let cardBox = document.querySelector('#card-box');
+    cardBox.innerHTML += /*html*/ `
+    <div class="card" id="card-${i}" onclick="">
+        <span class="poke-id">#${i}</span>
+        <h3>${getName(i)}</h3>
+        ${renderTypes(types)}
+        <img class="img-small" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i+1}.png" alt="">
+    </div>
+    `
+    document.querySelector(`#card-${i}`).style.backgroundColor = bgColor(i);
+}
+
+
+function bgColor(i) {
+    let types = getTypes(i);
+    console.log(types);
     let color = `var(--default-bg)`;
-    for(let i = 0; i < pokeTypes.length; i++) {
-        if(types.indexOf(pokeTypes[i]) > -1) {
-            color = `var(--${pokeTypes[i]})`
+    for(let j = 0; j < types.length; j++) {
+        if(pokeTypes.includes(types[j])) {
+            color = `var(--${types[j]})`;
             return color;
-        } 
+        }
     }
     return color;
 }
 
-
-function capitalize(s) {
-    return s[0].toUpperCase() + s.slice(1);
-}
 
 //GENERAL FUNCTIONS
 
@@ -80,19 +85,21 @@ function toggleSearch() {
 }
 
 
+function capitalize(s) {
+    return s[0].toUpperCase() + s.slice(1);
+}
+
+
 
 //CREATE POKEMON-ENTRY
 
-function closeEntry() {
-    document.querySelector('.layer').classList.toggle('dis-none');
-}
-
 function showEntry(i, currentPokemon) {
+    console.log();
     document.querySelector('.layer').classList.toggle('dis-none');
     let container = document.querySelector('.poke-entry-container');
     container.innerHTML = '';
     container.innerHTML += /*html*/ `
-    <div class="entry-headline"}>
+    <div class="entry-headline">
         <span id="entry-id">#${i}</span>
         <i id="close-entry" class="fa-solid fa-xmark" onclick="closeEntry()"></i>
     </div>
@@ -102,5 +109,9 @@ function showEntry(i, currentPokemon) {
     `
 
     console.log(bgColor(currentPokemon));
+}
+
+function closeEntry() {
+    document.querySelector('.layer').classList.toggle('dis-none');
 }
 
