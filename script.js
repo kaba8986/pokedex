@@ -93,6 +93,10 @@ function toggleSearch() {
     }
 }
 
+function toggleNav() {
+
+}
+
 
 function capitalize(s) {
     return s[0].toUpperCase() + s.slice(1);
@@ -116,6 +120,14 @@ function showEntry(i) {
         <h3>${getName(i)}</h3>
         ${renderTypes(types)}
         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i}.png" alt="">
+    </div>
+    <div id="entry-content-${i}" class="entry-content">
+        <nav id="entry-nav-${i}" class="entry-nav">
+            <a href="#" class="active-link" onclick="${toggleNav()}">About</a>
+            <a href="#" onclick="${toggleNav()}">Stats</a>
+            <a href="#" onclick="${toggleNav()}">Evolution</a>
+            <a href="#" onclick="${toggleNav()}">Moves</a>
+        </nav>
     </div>
     `
 }
