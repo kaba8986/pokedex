@@ -10,7 +10,7 @@ async function loadPokedex() {
         let response = await fetch(url);
         currentPokemon = await response.json();
         pokeList.push(currentPokemon)
-        renderCard(i)
+        renderCard(i);
     }
 }
 
@@ -135,6 +135,11 @@ function showEntry(i) {
 
 
 function changeEntry(i, j) {
+    if(i == 0 && j == -1 ) {
+        return;
+    } else if (i == pokeList.length - 1 && j == 1) {
+        return;
+    }
     showEntry(i + j);
 }
 
