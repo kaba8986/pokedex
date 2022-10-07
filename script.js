@@ -1,6 +1,8 @@
 
 let currentPokemon;
+let currPos = 0;
 let pokeList = [];
+let pokenames = [];
 let pokeTypes = ['Fire', 'Water', 'Grass', 'Electric', 'Poison'];
 
 //FETCH POKEMON DATAS
@@ -11,6 +13,7 @@ async function loadPokedex() {
         currentPokemon = await response.json();
         pokeList.push(currentPokemon)
         renderCard(i);
+        pokenames.push(currentPokemon.name);
     }
 }
 
@@ -100,18 +103,31 @@ function capitalize(s) {
 
 
 function scrollToPokemon(name) {
-    let i = pokeList.indexOf(name);
+    let i = pokenames.indexOf(name);
     let card = document.querySelector(`#card-${i}`);
-    card.scrollIntoView();
-    
-    
+    let targetPos = card.offsetTop;
+    window.scrollTo({
+        top: targetPos - 95,
+        behavior: 'smooth'
+    });
+    currPos = targetPos;
 }
 
+
 function enter() {
-    if(event.key === 'Enter') {
+    if (event.key === 'Enter') {
         let input = document.querySelector('#input-field');
-        scrollToPokemon(input.value);     
+        if (checkIfPokemon(input.value)) {
+            scrollToPokemon(input.value);
+        } else {
+            alert('There is no such Pokémon in the database.');
+            input.value = '';
+        }
     }
+}
+
+function checkIfPokemon(name) {
+    return pokenames.indexOf(name.toLowerCase()) > -1;
 }
 
 
