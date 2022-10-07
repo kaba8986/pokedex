@@ -103,8 +103,10 @@ function showEntry(i) {
     let container = document.querySelector('.poke-entry-container');
     container.innerHTML = '';
     container.innerHTML = /*html*/ `
-    <div id ="entry-headline-${i}" class="entry-headline" style="background: ${bgColor(i)}"></div>
-    <div id="entry-imgbox-${i}" class="entry-imgbox" style="background: ${bgColor(i)}"></div>
+    <div class="entry-upper-box">
+        <div id ="entry-headline-${i}" class="entry-headline" style="background: ${bgColor(i)}"></div>
+        <div id="entry-imgbox-${i}" class="entry-imgbox" style="background: ${bgColor(i)}"></div>
+    </div>
     <div id="entry-content-${i}" class="entry-content"></div>`
     renderHeadline(i);
     renderImgBox(i, types);

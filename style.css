@@ -211,6 +211,8 @@ body {
 
 
 .poke-entry-container {
+    display: flex;
+    flex-direction: column;
     position: fixed;
     top: 55%;
     left: 50%;
@@ -464,14 +466,39 @@ body {
         padding: 30px 20px 110px 20px;
     }
 }
-/*
-@media (max-height: 420px) {
+
+@media (max-height: 660px) {
     .poke-entry-container {
-        display: flex;
-        flex-direction: row;
-        width: auto;
+        top: 80px;
+        transform: unset;
+        transform: translateX(-50%);
         height: 100%;
         border-radius: 0px;
     }
 }
-*/
+
+
+@media (max-height: 400px) {
+    .poke-entry-container {
+        flex-direction: row-reverse;
+        width: 100%;
+        height: 100%;
+    }
+
+    .entry-upper-box {
+        width: 50%;
+        height: 100vh;
+    }
+
+    .entry-content {
+        width: 50%;   
+    }
+
+    .entry-imgbox {
+        height: 100vh;
+    }
+
+    .entry-imgbox img {
+        bottom: 140px;
+    }
+}
