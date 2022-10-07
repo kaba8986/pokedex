@@ -218,6 +218,7 @@ function scrollToPokemon(name) {
         behavior: 'smooth'
     });
     currPos = targetPos;
+    showEntry(i);
 }
 
 
