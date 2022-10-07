@@ -62,6 +62,7 @@ body {
     height: 100%;
     line-height: 100%;
     font-size: 32px;
+    padding-right: 30px;
 }
 
 .search-bar {
@@ -80,6 +81,7 @@ body {
     border-radius: 25px;
     outline: none;
     padding-left: 120px;
+    padding-right: 15px;
     font-size: 20px;
     color: grey;
     border: none;
@@ -335,4 +337,42 @@ body {
 .stats-bar .bar-line {
     height: 5px;
     background-color: green;
+}
+
+
+/************* MEDIA **************/
+
+@media (max-width: 750px) {
+    #header {
+        padding: 15px 40px;
+    }
+}
+
+@media (max-width: 600px) {
+    #header {
+        height: 180px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        padding: unset;
+    }
+
+    #header #logo {
+        height: 40%;
+        line-height: 100%;
+        padding: unset;
+    }
+
+    .search-bar {
+        width: 270px;
+    }
+
+    #pokeball {
+        display: none;
+    }
+
+    #input-field{
+        
+    }
 }

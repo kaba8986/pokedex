@@ -5,6 +5,8 @@ let pokeList = [];
 let pokenames = [];
 let pokeTypes = ['Fire', 'Water', 'Grass', 'Electric', 'Poison', 'Bug', 'Flying', 'Fairy', 'Ground', 'Psychic', 'Fighting'];
 
+//disable readonly on small viewports
+visualViewport.addEventListener('resize', checkViewport);
 
 //FETCH POKEMON DATAS
 async function loadPokedex() {
@@ -249,4 +251,10 @@ function changeEntry(i, j) {
 
 function closeEntry() {
     document.querySelector('.layer').classList.add('dis-none');
+}
+
+function checkViewport() {
+    if(window.innerWidth <= 600) {
+        document.querySelector('#input-field').removeAttribute('readonly');
+    }
 }
