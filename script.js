@@ -7,7 +7,7 @@ let pokeTypes = ['Fire', 'Water', 'Grass', 'Electric', 'Poison', 'Bug', 'Flying'
 
 //FETCH POKEMON DATAS
 async function loadPokedex() {
-    for (let i = 0; i < 151; i++) {
+    for (let i = 0; i < 21; i++) {
         let url = `https://pokeapi.co/api/v2/pokemon/${i + 1}`;
         let response = await fetch(url);
         currentPokemon = await response.json();
