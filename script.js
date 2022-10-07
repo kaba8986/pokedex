@@ -3,7 +3,7 @@ let currentPokemon;
 let currPos = 0;
 let pokeList = [];
 let pokenames = [];
-let pokeTypes = ['Fire', 'Water', 'Grass', 'Electric', 'Poison'];
+let pokeTypes = ['Fire', 'Water', 'Grass', 'Electric', 'Poison', 'Bug', 'Flying', 'Fairy', 'Ground', 'Psychic', 'Fighting'];
 
 //FETCH POKEMON DATAS
 async function loadPokedex() {
@@ -42,6 +42,7 @@ function renderTypes(types) {
     }
     return string;
 }
+
 
 function getId(i) {
     let number = i + 1;
@@ -126,10 +127,10 @@ function enter() {
     }
 }
 
+
 function checkIfPokemon(name) {
     return pokenames.indexOf(name.toLowerCase()) > -1;
 }
-
 
 
 //CREATE POKEMON-ENTRY
