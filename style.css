@@ -359,13 +359,17 @@ body {
     }
 
     #header #logo {
-        height: 40%;
+        height: 35%;
         line-height: 100%;
         padding: unset;
     }
 
     .search-bar {
-        width: 270px;
+        width: 260px;
+    }
+
+    .search-bar #input-field { 
+        padding-left: 60px;
     }
 
     #pokeball {
@@ -424,5 +428,14 @@ body {
 
     .entry-nav a {
         letter-spacing: 0px;
+    }
+
+    
+    .card {
+        width: 280px;
+    }
+
+    #card-box {
+        padding: 30px 20px 110px 20px;
     }
 }

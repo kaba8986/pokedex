@@ -1,6 +1,7 @@
 //GLOBAL DECL
 let currentPokemon;
 let currPos = 0;
+let distanceTop = 95;
 let pokeList = [];
 let pokenames = [];
 let pokeTypes = ['Fire', 'Water', 'Grass', 'Electric', 'Poison', 'Bug', 'Flying', 'Fairy', 'Ground', 'Psychic', 'Fighting'];
@@ -213,7 +214,7 @@ function scrollToPokemon(name) {
     let card = document.querySelector(`#card-${i}`);
     let targetPos = card.offsetTop;
     window.scrollTo({
-        top: targetPos - 95,
+        top: targetPos - distanceTop,
         behavior: 'smooth'
     });
     currPos = targetPos;
@@ -225,6 +226,7 @@ function enter() {
         let input = document.querySelector('#input-field');
         if (checkIfPokemon(input.value)) {
             scrollToPokemon(input.value);
+            input.value = '';
         } else {
             alert('There is no such Pokémon in the database.');
             input.value = '';
@@ -256,5 +258,8 @@ function closeEntry() {
 function checkViewport() {
     if(window.innerWidth <= 600) {
         document.querySelector('#input-field').removeAttribute('readonly');
+        distanceTop = 195;
+    } else {
+        distanceTop = 95;
     }
 }
