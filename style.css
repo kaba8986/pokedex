@@ -51,8 +51,7 @@ body {
     position: sticky;
     top: 0;
     left: 0;
-    background: rgb(220, 220, 220);
-    background: #818181;
+    background: #5a5a5a;
     width: 100%;
     height: 80px;
     padding: 15px 80px;
@@ -336,16 +335,19 @@ body {
     border-bottom: 2px solid transparent;
     text-decoration: none;
     letter-spacing: 1px;
+    filter: blur(2px);
+    cursor: default;
 }
 
-.entry-nav a:hover {
+/* .entry-nav a:hover {
     color: rgb(42, 42, 42);
     border-bottom: 2px solid rgb(42, 42, 42);
-}
+} */
 
 .entry-nav a.active-link {
     color: rgb(42, 42, 42);
     border-bottom: 2px solid rgb(42, 42, 42);
+    filter: none;
 }
 
 .entry-main {
