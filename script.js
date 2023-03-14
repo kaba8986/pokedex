@@ -6,20 +6,80 @@ let pokeList = [];
 let pokenames = [];
 let pokeTypes = ['Fire', 'Water', 'Grass', 'Electric', 'Poison', 'Bug', 'Flying', 'Fairy', 'Ground', 'Psychic', 'Fighting'];
 
+let loadLimit = 20;
+let isLoading = false;
+let listEnd = 250;
+
+const loader = document.querySelector('.loader');
+
+
+
+
 //disable readonly on small viewports
 visualViewport.addEventListener('resize', checkViewport);
 
 //FETCH POKEMON DATAS
+
+
+async function loadPokedex() {
+    for(let i = 0; i < loadLimit; i++) {
+        let API_URL = `https://pokeapi.co/api/v2/pokemon/${i+1}`;
+        let response = await fetch(API_URL);
+        currentPokemon = await response.json();
+        pokeList.push(currentPokemon)
+        renderCards(i);
+        pokenames.push(currentPokemon.name);
+    }
+
+
+    if (!isLoading) {
+        window.addEventListener('scroll', loadMorePokemons);
+    }
+}
+
+async function loadMorePokemons() {
+    let additionalAmount = checkIfListendReached();
+    if(window.scrollY + window.innerHeight >= document.body.clientHeight - 100 && !isLoading) {
+        isLoading = true;
+        for(let i = loadLimit; i < loadLimit + additionalAmount; i++) {
+            let API_URL = `https://pokeapi.co/api/v2/pokemon/${i+1}`;
+            let response = await fetch(API_URL);
+            currentPokemon = await response.json();
+            pokeList.push(currentPokemon);
+            renderCards(i);
+            pokenames.push(currentPokemon.name);
+        }
+        loadLimit += 30;
+        // offset += 30;
+        isLoading = false;
+    }
+}
+
+
+function checkIfListendReached() {
+    let additionalAmount = 30;
+    if(loadLimit + additionalAmount >= listEnd) {
+        additionalAmount = listEnd - loadLimit;
+    }
+    return additionalAmount;
+}
+
+/*
 async function loadPokedex() {
     for (let i = 0; i < 151; i++) {
+
         let url = `https://pokeapi.co/api/v2/pokemon/${i + 1}`;
         let response = await fetch(url);
         currentPokemon = await response.json();
         pokeList.push(currentPokemon)
         renderCards(i);
         pokenames.push(currentPokemon.name);
+
     }
 }
+*/
+
+
 
 
 //GET BASE INFOS
@@ -266,3 +326,6 @@ function checkViewport() {
         distanceTop = 95;
     }
 }
+
+
+//Infinite Scroll Functions
