@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="img/pokeball.png">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-    <script src="https://kit.fontawesome.com/b7a5700e28.js" crossorigin="anonymous"></script>
-    <title>Pokedex</title>
-</head>
-<body onload="loadPokedex()">
-    <div class="layer dis-none">
-        <div class="poke-entry-container"></div>
-    </div>
-    <div id="header">
-      <img src="img/logo2.png" id="logo">
-      <div class="search-bar">
-        <input type="text" name="" id="input-field" readonly="readonly" onkeydown="enter()" placeholder="press enter">
-        <i id="magnifying-glass" class="fa-solid fa-magnifying-glass"></i>
-        <img id="pokeball" src="img/pokeball.png" alt="" onclick="toggleSearch()">
-      </div>
-    </div>
-    <div id="card-box">
 
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" type="image/x-icon" href="img/pokeball.png">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+  <script src="https://kit.fontawesome.com/b7a5700e28.js" crossorigin="anonymous"></script>
+  <title>Pokedex</title>
+</head>
+
+<body onload="loadPokedex()">
+  <div class="layer dis-none">
+    <div class="poke-entry-container"></div>
+  </div>
+  <div id="header">
+    <img src="img/logo2.png" id="logo">
+    <div class="search-bar">
+      <input type="text" name="" id="input-field" readonly="readonly" onkeydown="enter()" placeholder="press enter">
+      <i id="magnifying-glass" class="fa-solid fa-magnifying-glass"></i>
+      <img id="pokeball" src="img/pokeball.png" alt="" onclick="toggleSearch()">
     </div>
-    <div class="loader">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <footer id="footer">
-      <p>images by pngimg.com</p>
-    </footer>
+  </div>
+  <div id="card-box">
+    <img src="img/bg_nature.jpg" alt="" id="bg-img">
+
+  </div>
+  <div class="loader">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <footer id="footer">
+    <p>images by pngimg.com</p>
+  </footer>
 </body>
+
 </html>

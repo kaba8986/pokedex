@@ -64,22 +64,6 @@ function checkIfListendReached() {
     return additionalAmount;
 }
 
-/*
-async function loadPokedex() {
-    for (let i = 0; i < 151; i++) {
-
-        let url = `https://pokeapi.co/api/v2/pokemon/${i + 1}`;
-        let response = await fetch(url);
-        currentPokemon = await response.json();
-        pokeList.push(currentPokemon)
-        renderCards(i);
-        pokenames.push(currentPokemon.name);
-
-    }
-}
-*/
-
-
 
 
 //GET BASE INFOS
@@ -291,7 +275,7 @@ function enter() {
             scrollToPokemon(input.value);
             input.value = '';
         } else {
-            alert('There is no such Pokémon in the database.');
+            alert('There is no such Pokémon listed yet. Scroll down to load some more.');
             input.value = '';
         }
     }
